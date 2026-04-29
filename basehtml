@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}Simple Blog{% endblock %}</title>
+
+    <!-- Link to external CSS stylesheet -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body>
+
+    <!-- ====== NAVIGATION BAR ====== -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <!-- Blog brand / logo -->
+            <a href="{{ url_for('index') }}" class="nav-brand">
+                ✏️ Simple Blog
+            </a>
+
+            <!-- Navigation links -->
+            <ul class="nav-links">
+                <li><a href="{{ url_for('index') }}">🏠 Home</a></li>
+                <li><a href="{{ url_for('create') }}">➕ Create Post</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- ====== MAIN CONTENT AREA ====== -->
+    <main class="main-content">
+        <!-- Flash messages / alerts (handled by JS in static/script.js) -->
+        <div id="alert-container"></div>
+
+        <!-- Child templates inject their content here -->
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- ====== FOOTER ====== -->
+    <footer class="footer">
+        <p>Simple Blog &mdash; SEC035 Web Programming Lab &bull; B.Tech CSE &bull; 2025-26</p>
+    </footer>
+
+    <!-- Link to external JavaScript file -->
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
