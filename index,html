@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block title %}Home — Simple Blog{% endblock %}
+
+{% block content %}
+
+<!-- ====== PAGE HEADER ====== -->
+<div class="page-header">
+    <h1>📝 All Blog Posts</h1>
+    <p class="subtitle">Read, edit, or delete your posts below.</p>
+    <a href="{{ url_for('create') }}" class="btn btn-primary">➕ New Post</a>
+</div>
+
+<!-- ====== BLOG POSTS LIST ====== -->
+{% if posts %}
+    <div class="posts-grid">
+        {% for post in posts %}
+        <article class="post-card" id="post-{{ post.id }}">
+
+            <!-- Post Title -->
+            <h2 class="post-title">{{ post.title }}</h2>
+
+            <!-- Post Content -->
+            <p class="post-content">{{ post.content }}</p>
+
+            <!-- Action Buttons: Edit & Delete -->
+            <div class="post-actions">
+                <!-- Edit button → navigates to edit page -->
+                <a href="{{ url_for('edit', post_id=post.id) }}" class="btn btn-edit">
+                    ✏️ Edit
+                </a>
+
+                <!-- Delete form → sends POST to /delete/<id> -->
+                <form action="{{ url_for('delete', post_id=post.id) }}"
+                      method="POST"
+                      class="delete-form"
+                      onsubmit="return confirmDelete(event)">
+                    <button type="submit" class="btn btn-delete">
+                        🗑️ Delete
+                    </button>
+                </form>
+            </div>
+
+        </article>
+        {% endfor %}
+    </div>
+
+{% else %}
+    <!-- Shown when there are no posts -->
+    <div class="empty-state">
+        <p>📭 No blog posts yet.</p>
+        <a href="{{ url_for('create') }}" class="btn btn-primary">Create Your First Post</a>
+    </div>
+{% endif %}
+
+{% endblock %}
