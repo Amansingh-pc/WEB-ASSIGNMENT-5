@@ -1,0 +1,4 @@
+# requirements.txt — Simple Blog Platform
+# Install with: pip install -r requirements.txt
+
+flask>=3.0.0
