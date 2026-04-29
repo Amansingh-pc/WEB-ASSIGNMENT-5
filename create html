@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block title %}Create Post — Simple Blog{% endblock %}
+
+{% block content %}
+
+<!-- ====== PAGE HEADER ====== -->
+<div class="page-header">
+    <h1>➕ Create New Post</h1>
+    <p class="subtitle">Fill in the form below to publish a new blog post.</p>
+</div>
+
+<!-- ====== CREATE FORM ====== -->
+<div class="form-container">
+    <form action="{{ url_for('create') }}" method="POST" id="create-form">
+
+        <!-- Post Title Field -->
+        <div class="form-group">
+            <label for="title">Post Title <span class="required">*</span></label>
+            <input
+                type="text"
+                id="title"
+                name="title"
+                placeholder="Enter an engaging title..."
+                required
+                maxlength="150"
+                autocomplete="off"
+            />
+            <!-- Live character counter powered by script.js -->
+            <small class="char-counter" id="title-counter">0 / 150</small>
+        </div>
+
+        <!-- Post Content Field -->
+        <div class="form-group">
+            <label for="content">Post Content <span class="required">*</span></label>
+            <textarea
+                id="content"
+                name="content"
+                placeholder="Write your blog post content here..."
+                required
+                rows="8"
+                maxlength="2000"
+            ></textarea>
+            <!-- Live character counter powered by script.js -->
+            <small class="char-counter" id="content-counter">0 / 2000</small>
+        </div>
+
+        <!-- Form Action Buttons -->
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">📤 Publish Post</button>
+            <a href="{{ url_for('index') }}" class="btn btn-secondary">✖ Cancel</a>
+        </div>
+
+    </form>
+</div>
+
+{% endblock %}
